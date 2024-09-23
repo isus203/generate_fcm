@@ -1,0 +1,25 @@
+# Add here a list of fqname
+# You can get it if you try to build AOSP without a fcm
+# check_vintf will print a list of needed entries
+# This currently works with AIDL and HIDL
+ 
+  android.hardware.audio.effect@7.0::IEffectsFactory/default
+  android.hardware.audio@7.0::IDevicesFactory/default
+  android.hardware.bluetooth.audio@2.1::IBluetoothAudioProvidersFactory/default
+  android.hardware.boot@1.2::IBootControl/default
+  android.hardware.cas.IMediaCasService/default
+  android.hardware.drm@1.4::ICryptoFactory/clearkey
+  android.hardware.drm@1.4::ICryptoFactory/widevine
+  android.hardware.drm@1.4::IDrmFactory/clearkey
+  android.hardware.drm@1.4::IDrmFactory/widevine
+  android.hardware.gnss.IGnss/default
+  android.hardware.media.c2@1.2::IComponentStore/default
+  android.hardware.power.IPower/default
+  android.hardware.tetheroffload.control@1.1::IOffloadControl/default
+  android.hardware.usb@1.3::IUsb/default
+  android.hardware.vibrator.IVibrator/default
+  android.hardware.vibrator.IVibratorManager/default
+  android.hardware.wifi.hostapd.IHostapd/default
+  android.hardware.wifi.supplicant.ISupplicant/default
+  android.hardware.wifi@1.5::IWifi/default
+  vendor.mediatek.hardware.camera.isphal@1.0::IISPModule/internal/0
