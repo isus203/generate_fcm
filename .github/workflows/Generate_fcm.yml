@@ -1,0 +1,59 @@
+name: Generate fcm
+
+on:
+  workflow_dispatch:
+    inputs:
+      USER_NAME:
+        description: 'Name in GitHub Account'
+        required: true
+        default: ''
+      USER_EMAIL:
+        description: 'E-mail in GitHub Account'
+        required: true
+        default: ''
+
+jobs:
+  dump:
+    name: Generate fcm
+    if: github.event.repository.owner.id == github.event.sender.id
+    runs-on: ubuntu-20.04
+    env:
+      UN: ${{ github.event.inputs.USER_NAME }}
+      UEM: ${{ github.event.inputs.USER_EMAIL }}
+    permissions:
+      contents: write
+    steps:
+    - name: Check Out
+      uses: actions/checkout@v4
+
+    - name: Cleanup
+      uses: rokibhasansagar/slimhub_actions@main
+      
+    - name: Update Packages
+      run: |
+        sudo apt update \
+        && sudo apt -y upgrade \
+        && sudo apt install python3 git -y
+        
+    - name: Setting up Git
+      run: |
+        git config --global user.name "${{ env.UN }}"
+        git config --global user.email "${{ env.UEM }}"
+
+    - name: Install repo
+      run: |
+        git clone https://github.com/${{ env.UN }}/generate_fcm.git
+        cd generate_fcm
+
+    - name: launch generate_fcm
+      run: |
+        python3 generate_fcm.py
+
+    - name: Uploading a file to the repository 
+      run: |
+        sudo rm -r generate_fcm
+        git add .
+        git commit -m " loading fcm.xml "
+        git branch -M main
+        git push origin main
+        
